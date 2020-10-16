@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+
+  <link rel="stylesheet" href="https://rawcdn.githack.com/trekturkey/page/dc0c8fe65bf3f3c3848bcdcaa36a366cf26ffc2f/page-style.css">
+
+  
+</head>
+<body>
+
+
+  <script>   
+    window.onmessage = (e) => {
+        
+            if (e.data.hasOwnProperty("right")) {
+                //console.log(e.data.right);
+                var d = document.body.innerHTML;
+                document.body.innerHTML = e.data.right + d;
+
+                setTimeout( function() {
+                    var el = document.createElement('script');
+                    el.src = 'https://rawcdn.githack.com/trekturkey/page/dc0c8fe65bf3f3c3848bcdcaa36a366cf26ffc2f/page-script.js';
+                    document.body.appendChild(el);
+                }, 2000);
+
+                var v = 0, height = 0;
+
+                setInterval(function()  { 
+                height = document.body.offsetHeight; 
+                window.parent.postMessage({   
+                    frameHeight: height,
+                    additional: v
+                }, '*');   
+                //console.log(height - v); // check the message is being sent correctly
+                v = 0;
+                }, 500);
+            } 
+    };
+  </script>
+</body>
+
+</html>
